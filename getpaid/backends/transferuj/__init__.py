@@ -32,6 +32,8 @@ class PaymentProcessor(PaymentProcessorBase):
     def compute_sig(params, fields, key):
         text = ''
         for field in fields:
+            if text:
+                text += '&'
             text += unicode(params.get(field, '')).encode('utf-8')
         text += key
         return hashlib.md5(text).hexdigest()
